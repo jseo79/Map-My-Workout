@@ -59,19 +59,21 @@ a:visited {
 }
 
 .workout {
+	position: relative;
 	background-color: #42484d;
 	border-radius: 5px;
 	padding: 1.5rem 2.25rem;
 	margin-bottom: 1.75rem;
 	cursor: pointer;
-
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	gap: 0.75rem 1.5rem;
 }
+
 .workout--running {
 	border-left: 5px solid #00c46a;
 }
+
 .workout--biking {
 	border-left: 5px solid #ffb545;
 }
@@ -209,4 +211,40 @@ a:visited {
 }
 .biking-popup .leaflet-popup-content-wrapper {
 	border-left: 5px solid #ffb545;
+}
+
+.buttons {
+	background-color: #fafbfc;
+	border: 1px solid rgba(27, 31, 35, 0.15);
+	border-radius: 6px;
+	box-sizing: border-box;
+	color: #24292e;
+
+	font-family: -apple-system, system-ui, 'Segoe UI', Helvetica, Arial,
+		sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 20px;
+	padding: 6px 16px;
+	margin: 10px;
+}
+
+.buttons:hover {
+	background-color: #c5c5c5;
+	text-decoration: none;
+	transition-duration: 0.1s;
+}
+
+.button_reset {
+	background-color: #c52626;
+}
+
+.close_buttons {
+	position: absolute;
+	background-color: transparent;
+	border: none;
+	color: #ffffff;
+	right: 5px;
+	font-size: 16px;
+	line-height: 1;
 }
