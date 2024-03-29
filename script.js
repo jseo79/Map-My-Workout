@@ -80,6 +80,7 @@ class App {
 	#map;
 	#mapEvent;
 	#workouts = [];
+	#markers = [];
 
 	constructor() {
 		this._getPosition();
@@ -200,7 +201,7 @@ class App {
 		}
 
 		this.#workouts.push(workout);
-		this._renderWorkoutMarker(workout);
+		this.#markers.push(this._renderWorkoutMarker(workout));
 		this._renderWorkout(workout);
 		this._hideForm();
 		this._moveMapLocation(workout);
@@ -219,6 +220,8 @@ class App {
 		if (workoutIndex === -1) return;
 
 		this.#workouts.splice(workoutIndex, 1);
+		this.#markers[workoutIndex].remove();
+		this.#markers.splice(workoutIndex, 1);
 
 		workoutElement.remove();
 
@@ -226,7 +229,7 @@ class App {
 	}
 
 	_renderWorkoutMarker(workout) {
-		L.marker(workout.coords)
+		const marker = L.marker(workout.coords)
 			.addTo(this.#map)
 			.bindPopup(
 				L.popup({
@@ -243,6 +246,11 @@ class App {
 				}`
 			)
 			.openPopup();
+		console.log(marker);
+		// setTimeout(function () {
+		// 	marker.remove();
+		// }, 1000);
+		return marker;
 	}
 
 	_renderWorkout(workout) {
