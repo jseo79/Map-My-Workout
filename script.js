@@ -201,7 +201,8 @@ class App {
 		}
 
 		this.#workouts.push(workout);
-		this.#markers.push(this._renderWorkoutMarker(workout));
+		const marker = this._renderWorkoutMarker(workout);
+		this.#markers.push(marker);
 		this._renderWorkout(workout);
 		this._hideForm();
 		this._moveMapLocation(workout);
