@@ -1,4 +1,4 @@
-class Workout {
+export class Workout {
 	date = new Date();
 	id = (Date.now() + '').slice(-10);
 
@@ -30,7 +30,7 @@ class Workout {
 	}
 }
 
-class Running extends Workout {
+export class Running extends Workout {
 	type = 'running';
 
 	constructor(coords, distance, duration, cadence) {
@@ -46,7 +46,7 @@ class Running extends Workout {
 	}
 }
 
-class Biking extends Workout {
+export class Biking extends Workout {
 	type = 'biking';
 
 	constructor(coords, distance, duration, elevationGain) {
@@ -61,10 +61,3 @@ class Biking extends Workout {
 		return this.speed;
 	}
 }
-
-// Export the classes
-module.exports = {
-	Workout,
-	Running,
-	Biking,
-};

@@ -1,6 +1,6 @@
 'use strict';
 
-import { Workout, Running, Biking } from './workout.js';
+import * as activity from './activities.js';
 
 const form = document.querySelector('.form');
 const containerWorkouts = document.querySelector('.workouts');
@@ -37,7 +37,6 @@ class ClientApp {
 				this._deleteWorkout(event.target);
 			}
 		});
-		this._getLocalStorage();
 	}
 
 	// Permission to access user location
@@ -122,7 +121,12 @@ class ClientApp {
 			)
 				return alert('Inputs have to be positive numbers');
 
-			workout = new Running([lat, lng], distance, duration, cadence);
+			workout = new activity.Running(
+				[lat, lng],
+				distance,
+				duration,
+				cadence
+			);
 		}
 
 		if (type === 'biking') {
@@ -133,7 +137,12 @@ class ClientApp {
 			)
 				return alert('Inputs have to be positive numbers');
 
-			workout = new Biking([lat, lng], distance, duration, elevation);
+			workout = new activity.Biking(
+				[lat, lng],
+				distance,
+				duration,
+				elevation
+			);
 		}
 
 		this.#workouts.push(workout);
@@ -142,7 +151,6 @@ class ClientApp {
 		this._renderWorkout(workout);
 		this._hideForm();
 		this._moveMapLocation(workout);
-		this._setLocalStorage();
 	}
 
 	_deleteWorkout(button) {
@@ -161,8 +169,6 @@ class ClientApp {
 		this.#markers.splice(workoutIndex, 1);
 
 		workoutElement.remove();
-
-		this._setLocalStorage();
 	}
 
 	_renderWorkoutMarker(workout) {
@@ -252,18 +258,6 @@ class ClientApp {
 		);
 
 		this.#map.setView(workout.coords, 13);
-	}
-
-	_setLocalStorage() {
-		localStorage.setItem('workouts', JSON.stringify(this.#workouts));
-	}
-
-	_getLocalStorage() {
-		const workoutsData = JSON.parse(localStorage.getItem('workouts'));
-
-		if (!workoutsData) return;
-
-		this.#workouts = workoutsData;
 	}
 
 	reset() {
