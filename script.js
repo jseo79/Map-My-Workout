@@ -10,8 +10,6 @@ const inputElevation = document.querySelector('.form__input--elevation');
 const resetButton = document.querySelector('.button_reset');
 const closeButtons = document.querySelectorAll('.close_buttons');
 
-let map, mapEvent;
-
 class Workout {
 	date = new Date();
 	id = (Date.now() + '').slice(-10);
