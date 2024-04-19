@@ -65,7 +65,7 @@ class ClientApp {
 		// Handling clicks on maps
 		this.#map.on('click', this._showForm.bind(this));
 
-		// Loading workouts from localStorage
+		// Loading workouts from server
 		this.#workouts.forEach((work) => {
 			this._renderWorkout(work);
 			this._renderWorkoutMarker(work);
@@ -151,6 +151,27 @@ class ClientApp {
 		this._renderWorkout(workout);
 		this._hideForm();
 		this._moveMapLocation(workout);
+
+		// 	// Send the workouts array to the server
+		// 	fetch('/workouts', {
+		// 		method: 'POST',
+		// 		headers: {
+		// 			'Content-Type': 'application/json',
+		// 		},
+		// 		body: JSON.stringify({ workouts: this.#workouts }),
+		// 	})
+		// 		.then((response) => {
+		// 			if (!response.ok) {
+		// 				throw new Error('Failed to send workouts to server');
+		// 			}
+		// 			return response.json();
+		// 		})
+		// 		.then((data) => {
+		// 			console.log('Workouts sent to server:', data);
+		// 		})
+		// 		.catch((error) => {
+		// 			console.error('Error sending workouts to server:', error);
+		// 		});
 	}
 
 	_deleteWorkout(button) {
