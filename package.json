@@ -1,0 +1,14 @@
+{
+	"name": "map_my_workout",
+	"version": "1.0.0",
+	"description": "A simple web app where you can log the locations of your runs and/or bike rides.",
+	"main": "server.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"express": "^4.19.2"
+	}
+}
