@@ -1,32 +1,55 @@
 import express from 'express';
-import mysql from 'mysql2';
+import path from 'path';
+import { connection } from './db.js';
 
 const app = express();
 app.use(express.json());
-import path from 'path';
-const port = 8000;
 
+const port = 8000;
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
 	res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-const con = mysql.createPool({
-	host: '172.17.0.2',
-	user: 'root',
-	password: 'admin',
-	database: 'workouts',
+app.post('/api/workout', (req, res) => {
+	try {
+		writeWorktout(req.body);
+	} catch (err) {
+		res.status(500).send('Woops something went wrong.');
+	}
+	res.status(201).json(req.body).send();
 });
 
-con.query('CREATE DATABASE workouts', (err, results) => {
-	if (err) {
-		console.error('Error creating database:', err);
-	} else {
-		console.log('Database created successfully');
-	}
+app.get('/api/workout/:workoutId', (req, res) => {
+	getWorkout('');
+	// SELECT * FROM workout WHERE id = :workoutId
 });
+
+app.get('/api/workouts', (req, res) => {
+	// SELECT * FROM workout
+});
+
+app.patch('/api/workout/:workoutId', (req, res) => {
+	// UPDATE ... where id = id
+});
+
+// const con = mysql.createPool({
+// 	host: '172.17.0.2',
+// 	user: 'root',
+// 	password: 'admin',
+// 	database: 'workouts',
+// });
+
+// con.query('CREATE DATABASE workouts', (err, results) => {
+// 	if (err) {
+// 		console.error('Error creating database:', err);
+// 	} else {
+// 		console.log('Database created successfully');
+// 	}
+// });
 
 // // Route handler to handle POST requests to /workouts
 // app.post('/workouts', (req, res) => {

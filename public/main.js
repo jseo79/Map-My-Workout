@@ -1,5 +1,4 @@
 'use strict';
-
 import * as activity from './activities.js';
 
 const form = document.querySelector('.form');
@@ -11,7 +10,6 @@ const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 const resetButton = document.querySelector('.button_reset');
 const closeButtons = document.querySelectorAll('.close_buttons');
-
 class ClientApp {
 	#map;
 	#mapEvent;
